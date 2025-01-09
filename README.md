@@ -1,6 +1,6 @@
-#Weather Forecast App
+# Weather Forecast App
 
-##Overview
+## Overview
 The **Weather Forecast App** provides accurate and up-to-date weather information for your current location or a selected city. With a user-friendly interface and robust architecture, the app ensures a seamless experience for weather updates.
 
 ## Features
