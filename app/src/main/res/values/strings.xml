@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Weather Forecast App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="humidity">Humidity</string>
+    <string name="uv">UV</string>
+    <string name="real_feel">Real Feel</string>
+    <string name="pressure">Pressure</string>
+    <string name="value">Value</string>
+    <string name="cloud">Cloud</string>
+    <string name="location_icon">Location icon</string>
+    <string name="search_city">Search City</string>
+    <string name="week_forecast">Week Forecast</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="add_city">Add City</string>
+</resources>

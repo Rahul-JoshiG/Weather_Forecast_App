@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black_transparent">#E6000000</color>
+    <color name="transparent">#00000000</color>
+
+
+    <color name="primary">#6200EE</color>
+    <color name="primary_variant">#3700B3</color>
+    <color name="on_primary">#FFFFFF</color>
+
+    <color name="secondary">#03DAC6</color>
+    <color name="secondary_variant">#018786</color>
+    <color name="on_secondary">#000000</color>
+
+    <color name="background">#FFFFFF</color>
+    <color name="on_background">#000000</color>
+
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#000000</color>
+
+    <color name="error">#B00020</color>
+    <color name="on_error">#FFFFFF</color>
+
+    <!-- Text Color -->
+    <color name="text_color">#000000</color> <!-- Use on_background for primary text -->
+
+    <!-- Background Color -->
+    <color name="background_color">#FFFFFF</color> <!-- Use background -->
+
+    <!-- Bottom Bar Color -->
+    <color name="bottom_bar_color">#FFFFFF</color><!-- Secondary color for vibrancy -->
+    <color name="bottom_bar_text">#000000</color>
+
+    <!-- App Bar Color -->
+    <color name="app_bar_color">#FFFFFF</color>
+    <color name="app_bar_text">#000000</color>
+
+</resources>

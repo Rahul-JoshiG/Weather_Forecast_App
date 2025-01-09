@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="primary">#BB86FC</color> <!-- Lighter purple for dark mode -->
+    <color name="primary_variant">#3700B3</color> <!-- Deep purple for accents -->
+    <color name="on_primary">#000000</color> <!-- Black for contrast on primary -->
+
+    <color name="secondary">#03DAC6</color> <!-- Teal remains vibrant -->
+    <color name="secondary_variant">#018786</color> <!-- Darker teal for variation -->
+    <color name="on_secondary">#000000</color> <!-- Black for contrast on secondary -->
+
+    <color name="background">#121212</color> <!-- Standard dark mode background -->
+    <color name="on_background">#FFFFFF</color> <!-- White text for readability -->
+
+    <color name="surface">#121212</color> <!-- Matches background for dark surfaces -->
+    <color name="on_surface">#FFFFFF</color> <!-- White text for readability -->
+
+    <color name="error">#CF6679</color> <!-- Softer red for dark mode -->
+    <color name="on_error">#000000</color> <!-- Black for contrast on error -->
+
+    <!-- Text Color -->
+    <color name="text_color">#FFFFFF</color> <!-- White for readability on dark background -->
+
+    <!-- Background Color -->
+    <color name="background_color">#000000</color> <!-- Dark gray for background -->
+
+    <!-- Bottom Bar Color -->
+    <color name="bottom_bar_color">#000000</color> <!-- Primary variant for distinction -->
+    <color name="bottom_bar_text">#FFFFFF</color> <!-- Primary variant for distinction -->
+
+    <!-- App Bar Color -->
+    <color name="app_bar_color">#000000</color> <!-- Primary variant for a unified look -->
+    <color name="app_bar_text">#FFFFFF</color>
+</resources>
