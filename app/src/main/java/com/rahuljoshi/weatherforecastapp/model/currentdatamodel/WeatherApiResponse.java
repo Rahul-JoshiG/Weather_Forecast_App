@@ -3,6 +3,8 @@ package com.rahuljoshi.weatherforecastapp.model.currentdatamodel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
+//test line in rahul branch
 public class WeatherApiResponse {
 
     @SerializedName("location")
