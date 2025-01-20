@@ -3,238 +3,372 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.rahuljoshi.weatherforecastapp.viewmodel.WeatherViewModel" />
+    </data>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color">
+        android:background="@drawable/bg_blue">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".view.fragments.TodayFragment">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/materialToolbar"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/current_location"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/app_bar_color"
-                app:layout_constraintTop_toTopOf="parent"
-                app:title="Today Weather"
-                app:titleTextColor="@color/app_bar_text" />
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:padding="@dimen/_100sdp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="@dimen/_10sdp"
+                android:text="@{viewModel.getLocation()}"
+                android:drawableStart="@drawable/ic_location"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/_18ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/city_ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialToolbar">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:contentDescription="@string/location_icon"
-                    android:src="@drawable/ic_location"
-                    app:tint="@color/text_color" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/city_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/_16ssp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/city_ll" />
-
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/current_condition"
+                android:id="@+id/current_date_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:padding="@dimen/_10sdp"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/_20ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/current_temp"
-                app:layout_constraintStart_toStartOf="@+id/current_temp"
-                app:layout_constraintTop_toBottomOf="@+id/current_temp" />
+                android:paddingHorizontal="@dimen/_12sdp"
+                android:text=""
+                android:drawableStart="@drawable/ic_today"
+                android:drawableTint="@color/white"
+                android:textColor="#D1CFCF"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@id/current_location"
+                app:layout_constraintTop_toBottomOf="@id/current_location" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/condition_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:layout_margin="@dimen/_15sdp"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/current_date_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/current_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/_40ssp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_60ssp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/condition_image" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/condition_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintStart_toStartOf="@+id/current_temp"
+                app:layout_constraintTop_toBottomOf="@id/current_temp" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/linearLayoutCompat"
+            <View
+                android:id="@+id/horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/primary"
+                android:elevation="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/condition_name" />
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_20sdp"
-                android:background="@drawable/layout_background"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/current_condition">
+                app:cardBackgroundColor="@color/card_background"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line">
 
-                <!--for Humidity -->
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <GridLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:columnCount="2"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/weather_info_text"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/humidity"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/humidity_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp"
+                        android:layout_columnSpan="2"
+                        android:paddingHorizontal="@dimen/_15sdp"
+                        android:text="@string/weather_now"
+                        android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <!--for Real feel -->
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <!-- feels like-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/real_feel"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp" />
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        app:layout_constraintBottom_toTopOf="@+id/feels_like_value"
+                        app:layout_constraintTop_toTopOf="@+id/feels_like_value">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/real_feel_value"
+                        <ImageView
+                            android:id="@+id/feels_like"
+                            android:layout_width="@dimen/_42sdp"
+                            android:layout_height="@dimen/_42sdp"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:background="@drawable/round_image"
+                            android:padding="@dimen/_8sdp"
+                            android:src="@drawable/ic_temp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/feels_like_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="Feel like"
+                            app:layout_constraintStart_toEndOf="@id/feels_like"
+                            app:layout_constraintTop_toTopOf="@id/feels_like" />
+
+                        <TextView
+                            android:id="@+id/feels_like_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/hint"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/feels_like"
+                            app:layout_constraintStart_toEndOf="@+id/feels_like"
+                            app:layout_constraintTop_toBottomOf="@id/feels_like_text" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!--Wind-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp"
-                        android:textStyle="bold" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="@dimen/_20sdp">
 
-                <!--for UV -->
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/wind"
+                            android:layout_width="@dimen/_42sdp"
+                            android:layout_height="@dimen/_42sdp"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:background="@drawable/round_image"
+                            android:padding="@dimen/_8sdp"
+                            android:src="@drawable/ic_wind"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                        <TextView
+                            android:id="@+id/wind_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="Wind"
+                            app:layout_constraintStart_toEndOf="@id/wind"
+                            app:layout_constraintTop_toTopOf="@id/wind" />
+
+                        <TextView
+                            android:id="@+id/wind_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/wind_hint"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/wind"
+                            app:layout_constraintStart_toEndOf="@+id/wind"
+                            app:layout_constraintTop_toBottomOf="@id/wind_text" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <!--sunrise-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/uv"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp" />
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="@dimen/_20sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/uv_value"
+                        <ImageView
+                            android:id="@+id/sunrise"
+                            android:layout_width="@dimen/_42sdp"
+                            android:layout_height="@dimen/_42sdp"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:background="@drawable/round_image"
+                            android:padding="@dimen/_8sdp"
+                            android:src="@drawable/ic_sunrise"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/sunrise_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/sunrise"
+                            app:layout_constraintStart_toEndOf="@id/sunrise"
+                            app:layout_constraintTop_toTopOf="@id/sunrise" />
+
+                        <TextView
+                            android:id="@+id/sunrise_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/sunrise_time"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/sunrise"
+                            app:layout_constraintStart_toEndOf="@+id/sunrise"
+                            app:layout_constraintTop_toBottomOf="@id/sunrise_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!--sunset-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp"
-                        android:textStyle="bold" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="@dimen/_20sdp">
 
-                <!--for Pressure -->
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/sunset"
+                            android:layout_width="@dimen/_42sdp"
+                            android:layout_height="@dimen/_42sdp"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:background="@drawable/round_image"
+                            android:padding="@dimen/_8sdp"
+                            android:src="@drawable/ic_sunset"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                        <TextView
+                            android:id="@+id/sunset_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/sunset"
+                            app:layout_constraintStart_toEndOf="@id/sunset"
+                            app:layout_constraintTop_toTopOf="@id/sunset" />
+
+                        <TextView
+                            android:id="@+id/sunset_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/sunset_time"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/sunset"
+                            app:layout_constraintStart_toEndOf="@+id/sunset"
+                            app:layout_constraintTop_toBottomOf="@id/sunset_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!--sunset-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/pressure"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp" />
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="@dimen/_20sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/pressure_value"
+                        <ImageView
+                            android:id="@+id/humidity"
+                            android:layout_width="@dimen/_42sdp"
+                            android:layout_height="@dimen/_42sdp"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:background="@drawable/round_image"
+                            android:padding="@dimen/_8sdp"
+                            android:src="@drawable/ic_humidity"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/humidity_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/humidity"
+                            app:layout_constraintStart_toEndOf="@id/humidity"
+                            app:layout_constraintTop_toTopOf="@id/humidity" />
+
+                        <TextView
+                            android:id="@+id/humidity_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/humidity_time"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/humidity"
+                            app:layout_constraintStart_toEndOf="@+id/humidity"
+                            app:layout_constraintTop_toBottomOf="@id/humidity_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <!--Pressure -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp"
-                        android:textStyle="bold" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        app:layout_constraintBottom_toTopOf="@+id/uv_value"
+                        app:layout_constraintTop_toTopOf="@+id/uv_value">
 
-                <!--for Cloud -->
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/pressure"
+                            android:layout_width="@dimen/_42sdp"
+                            android:layout_height="@dimen/_42sdp"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:background="@drawable/round_image"
+                            android:padding="@dimen/_8sdp"
+                            android:src="@drawable/ic_pressure"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/cloud"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp" />
+                        <TextView
+                            android:id="@+id/pressure_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/pressure"
+                            app:layout_constraintStart_toEndOf="@id/pressure"
+                            app:layout_constraintTop_toTopOf="@id/pressure" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/cloud_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp"
-                        android:textColor="@color/text_color"
-                        android:textSize="@dimen/_16ssp"
-                        android:textStyle="bold" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                        <TextView
+                            android:id="@+id/pressure_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:text="@string/pressure_value"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/pressure"
+                            app:layout_constraintStart_toEndOf="@+id/pressure"
+                            app:layout_constraintTop_toBottomOf="@id/pressure_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </GridLayout>
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 </layout>

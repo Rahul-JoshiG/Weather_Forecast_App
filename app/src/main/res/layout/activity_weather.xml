@@ -3,37 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color"
         tools:context=".view.activity.WeatherActivity">
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_view"
-            android:name="com.rahuljoshi.weatherforecastapp.view.fragments.TodayFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:defaultNavHost="true"
             app:layout_constraintBottom_toTopOf="@id/bottom_view"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/navigation"/>
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_view"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_view"
-            android:background="@color/bottom_bar_color"
-            app:itemIconTint="@color/bottom_bar_text"
-            app:itemTextColor="@color/bottom_bar_text"
-            app:menu="@menu/bottom_nav_menu"
-            tools:ignore="VisualLintBottomNav" />
+            app:menu="@menu/bottom_nav_menu" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

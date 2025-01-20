@@ -1,3 +1,4 @@
+import org.gradle.kotlin.dsl.libs
 import java.util.Properties
 import java.io.FileInputStream
 
@@ -70,34 +71,35 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     //dagger hilt
-    implementation ("com.google.dagger:hilt-android:2.51.1")
-    annotationProcessor ("com.google.dagger:hilt-android-compiler:2.51.1")
-    annotationProcessor ("androidx.hilt:hilt-compiler:1.2.0")
-
+    implementation (libs.hilt.android)
+    annotationProcessor (libs.hilt.android.compiler)
+    annotationProcessor (libs.hilt.compiler)
 
     // Retrofit for HTTP requests
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation("com.google.code.gson:gson:2.11.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+    implementation(libs.google.gson)
 
     // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
-
-    // Optional Coroutine support if you're using it in your Java code
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation(libs.lifecycle.viewmodel.ktx)
 
     //size
-    implementation ("com.intuit.sdp:sdp-android:1.1.1")
-    implementation ("com.intuit.ssp:ssp-android:1.1.1")
+    implementation (libs.sdp.android)
+    implementation (libs.ssp.android)
 
     //glide for image
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
 
     //room database
-    implementation ("com.google.code.gson:gson:2.11.0")
-    implementation ("androidx.room:room-runtime:2.6.1")
-    annotationProcessor ("androidx.room:room-compiler:2.6.1")
+    implementation (libs.room.runtime)
+    annotationProcessor (libs.room.compiler)
+
+    //navigation
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+
+    //lotti animation
+    implementation (libs.lottie)
 }

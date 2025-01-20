@@ -16,47 +16,39 @@ public class SessionManager {
     // Initialize the SharedPreferences
     public static void initPreference(Context context) {
         Log.d(TAG, "initPreference: ");
-        if (mSharedPreferences == null) {
-            mSharedPreferences = context.getSharedPreferences(Constant.PREFERENCE_NAME, Context.MODE_PRIVATE);
-        }
+        mSharedPreferences = context.getSharedPreferences(Constant.PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
     // Save a string value
     public static void putString(String key, String value) {
         Log.d(TAG, "putString: " + key + " = " + value);
-        if (mSharedPreferences != null) {
-            mSharedPreferences.edit().putString(key, value).apply();
-        } else {
-            Log.e(TAG, "SharedPreferences not initialized");
-        }
+        mSharedPreferences.edit().putString(key, value).apply();
     }
 
     // Retrieve a boolean value
     public static String getString(String key) {
         Log.d(TAG, "getString: " + key);
-        if (mSharedPreferences != null) {
-            return mSharedPreferences.getString(key, Constant.CITY_KEY);
-        } else {
-            Log.e(TAG, "SharedPreferences not initialized");
-            return null;
-        }
+        return mSharedPreferences.getString(key, Constant.CITY_KEY);
     }
 
-    public static void putBoolean(String key, boolean value){
-        Log.d(TAG, "putBoolean: " + key + " = "+ value);
-        if (mSharedPreferences != null){
-            mSharedPreferences.edit().putBoolean(key, value).apply();
-        } else {
-            Log.d(TAG, "SharedPreferences not initialized");
-        }
+    public static void putBoolean(String key, boolean value) {
+        Log.d(TAG, "putBoolean: " + key + " = " + value);
+        mSharedPreferences.edit().putBoolean(key, value).apply();
     }
 
-    public static boolean getBoolean(String key){
+    public static boolean getBoolean(String key) {
         Log.d(TAG, "getBoolean: " + key);
-        if (mSharedPreferences != null){
-            return mSharedPreferences.getBoolean(key, false);
-        }
-        return false;
+        return mSharedPreferences.getBoolean(key, false);
+    }
+
+    public static void putUint(String key, String value) {
+        Log.d(TAG, "putUint: unit is = " + value);
+        mSharedPreferences.edit().putString(Constant.UNIT_NAME, value).apply();
+    }
+
+    public static String getUnit(String key) {
+        Log.d(TAG, "getMetricUnit: getting unit ");
+        return mSharedPreferences.getString(key, Constant.UNIT_NAME);
     }
 
 }

@@ -13,4 +13,20 @@
     <string name="week_forecast">Week Forecast</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="add_city">Add City</string>
+    <string name="weather_now">Weather now</string>
+    <string name="the_location_for_which_the_weather_is_displayed">The location for which the weather is displayed</string>
+    <string name="location">Location</string>
+    <string name="metric">Metric</string>
+    <string name="unit_system">Unit System</string>
+    <string name="day_date_name">Day Date Name</string>
+    <string name="app_icon">app icon</string>
+    <string name="weather_napp">Weather\nApp</string>
+    <string name="hint">__°</string>
+    <string name="wind_hint">__Km/h</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunrise_time">__:__AM</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunset_time">__:__PM</string>
+    <string name="humidity_time">_%</string>
+    <string name="pressure_value">_mbar</string>
 </resources>

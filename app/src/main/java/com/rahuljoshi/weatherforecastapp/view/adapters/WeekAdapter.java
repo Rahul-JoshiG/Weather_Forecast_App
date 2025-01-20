@@ -7,12 +7,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.rahuljoshi.weatherforecastapp.databinding.WeekWeatherLayoutBinding;
-import com.rahuljoshi.weatherforecastapp.model.forecastdatamodel.ForecastDay;
-import com.rahuljoshi.weatherforecastapp.model.forecastdatamodel.WeatherResponse;
+import com.rahuljoshi.weatherforecastapp.model.data.forecastmodel.ForecastDay;
+import com.rahuljoshi.weatherforecastapp.model.data.forecastmodel.Hour;
+import com.rahuljoshi.weatherforecastapp.model.data.forecastmodel.WeatherResponse;
+import com.rahuljoshi.weatherforecastapp.utils.Constant;
+import com.rahuljoshi.weatherforecastapp.utils.SessionManager;
+import com.rahuljoshi.weatherforecastapp.utils.WeatherIconMapper;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
     private final String TAG = "WeekAdapter";
@@ -39,8 +46,6 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        // Make sure this reflects the actual number of days forecasted.
-        // For a single week forecast, it should be 7.
         return mDay.size();
     }
 
@@ -61,21 +66,92 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.ViewHolder> {
 
         public void bind(ForecastDay forecastDay, WeatherResponse weatherResponse) {
             Log.d("ViewHolder", "bind: ");
-            int forecastIndex = 0;
 
-            String date = forecastDay.getDate();
-            binding.dayDate.setText(date);
+            long currentDateEpoch = forecastDay.getDate_epoch();
+            Date date = new Date(currentDateEpoch * 1000);
+            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd", Locale.ENGLISH);
+            String currentDate = formatter.format(date);
+            binding.dayDateText.setText(currentDate);
 
-            String dayTemp = String.format("%.1f °C", forecastDay.getHour().get(forecastIndex).getTemp_c());
-            binding.dayTemp.setText(dayTemp);
+            String conditionName = weatherResponse.getCurrent().getCondition().getText();
+            binding.dayConditionName.setText(conditionName);
 
-            String windSpeed = String.format("%.1f km/h", forecastDay.getHour().get(forecastIndex).getWind_kph());
-            binding.dayWindSpeed.setText(windSpeed);
+            Long code = (long) weatherResponse.getCurrent().getCondition().getCode();
+            boolean isDay = weatherResponse.getCurrent().getIs_day() == 1;
 
-            String iconUrl = "https:" + weatherResponse.getCurrent().getCondition().getIcon();
-            Glide.with(binding.getRoot()).load(iconUrl).into(binding.dayWeatherCondition);
+            setUpConditionAnimation(code, isDay);
 
-            forecastIndex++;
+            if (SessionManager.getUnit(Constant.UNIT_NAME).equals(Constant.UNIT_NAME)) {
+                updateUiForMetric(forecastDay);
+            } else {
+                updateUiForImperial(forecastDay);
+            }
+        }
+
+        private void setUpConditionAnimation(Long code, boolean isDay) {
+            Log.d("WeekAdapter", "setUpConditionAnimation: ");
+            int animationResId;
+
+            if(isDay){
+                animationResId = WeatherIconMapper.getDayAnimation(code);
+            }else{
+                animationResId = WeatherIconMapper.getNightAnimation(code);
+            }
+
+            binding.dayConditionIcon.setAnimation(animationResId);
+
+        }
+
+        private void updateUiForMetric(ForecastDay forecastDay) {
+            Log.d("WeekAdapter", "updateUiForMetric:");
+
+            // Get the current hour in 24-hour format
+            int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+
+            // Iterate through the hourly forecast data
+            for (Hour hourData : forecastDay.getHour()) { // Assuming Hour is a model class for hourly data
+                // Extract the hour part from the time string (e.g., "2025-01-20 10:00")
+                String time = hourData.getTime()    ;
+                int hourOfDay = Integer.parseInt(time.split(" ")[1].split(":")[0]);
+
+                // Check if the hour matches the current hour
+                if (hourOfDay == currentHour) {
+                    int dayTempC = (int) hourData.getTemp_c();
+                    binding.dayTemp.setText(String.format("%s°C", dayTempC));
+                    Log.d("WeekAdapter", "updateUiForMetric: Found matching hour, updated temperature.");
+                    return;
+                }
+            }
+
+            // Fallback if no matching hour is found
+            Log.d("WeekAdapter", "updateUiForMetric: No matching hour data found");
+        }
+
+
+
+        private void updateUiForImperial(ForecastDay forecastDay) {
+            Log.d("WeekAdapter", "updateUiForImperial: ");
+
+            // Get the current hour in 24-hour format
+            int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+
+            // Iterate through the hourly forecast data
+            for (Hour hourData : forecastDay.getHour()) { // Assuming Hour is a model class for hourly data
+                // Extract the hour part from the time string (e.g., "2025-01-20 10:00")
+                String time = hourData.getTime()    ;
+                int hourOfDay = Integer.parseInt(time.split(" ")[1].split(":")[0]);
+
+                // Check if the hour matches the current hour
+                if (hourOfDay == currentHour) {
+                    int dayTempF = (int) hourData.getTemp_f();
+                    binding.dayTemp.setText(String.format("%s°F", dayTempF));
+                    Log.d("WeekAdapter", "updateUiForMetric: Found matching hour, updated temperature.");
+                    return;
+                }
+            }
+
+            // Fallback if no matching hour is found
+            Log.d("WeekAdapter", "updateUiForMetric: No matching hour data found");
         }
     }
 }
