@@ -12,9 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.rahuljoshi.weatherforecastapp.R;
 import com.rahuljoshi.weatherforecastapp.databinding.FragmentWeekBinding;
-import com.rahuljoshi.weatherforecastapp.model.forecastdatamodel.ForecastDay;
+import com.rahuljoshi.weatherforecastapp.model.data.forecastmodel.ForecastDay;
 import com.rahuljoshi.weatherforecastapp.utils.Constant;
 import com.rahuljoshi.weatherforecastapp.utils.SessionManager;
 import com.rahuljoshi.weatherforecastapp.view.adapters.WeekAdapter;
@@ -31,14 +30,13 @@ public class WeekFragment extends Fragment {
 
     private FragmentWeekBinding mBinding;
     private WeatherViewModel mWeatherViewModel;
-    private WeekAdapter mWeekAdapter; // Declare your adapter
+    private WeekAdapter mWeekAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = FragmentWeekBinding.inflate(inflater, container, false);
         mWeatherViewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
-
         return mBinding.getRoot();
     }
 
@@ -49,7 +47,7 @@ public class WeekFragment extends Fragment {
         // Initialize the RecyclerView
         setupRecyclerView();
         observesWeatherForecastData();
-        mWeatherViewModel.fetchForecastWeatherData(SessionManager.getString(Constant.CITY_KEY), 7); // Fetch forecast for 7 days
+        mWeatherViewModel.fetchForecastWeatherData(SessionManager.getString(Constant.CITY_KEY));
     }
 
     private void setupRecyclerView() {
@@ -64,18 +62,15 @@ public class WeekFragment extends Fragment {
         mWeatherViewModel.getWeatherForecastData().observe(getViewLifecycleOwner(), response -> {
             Log.d(TAG, "observesWeatherForecastData: response = " + response.toString());
 
-            // Extract the forecasts from the WeatherResponse
-            List<ForecastDay> dailyForecasts = response.getForecast().getForecastday(); // Ensure this matches your actual structure
+            List<ForecastDay> dailyForecasts = response.getForecast().getForecastday();
 
-            // Update the adapter with the list of WeatherForecast
-            mWeekAdapter.updateData(dailyForecasts, response); // Assuming you've implemented an updateData method
+            mWeekAdapter.updateData(dailyForecasts, response);
             mBinding.recyclerView.setHasFixedSize(true);
         });
 
         mWeatherViewModel.getForecastIsLoading().observe(getViewLifecycleOwner(), isLoading->{
             if(isLoading){
                 mBinding.progressBar.setVisibility(View.VISIBLE);
-                mBinding.getRoot().setBackgroundResource(R.color.background_color);
             } else{
                 mBinding.progressBar.setVisibility(View.GONE);
             }

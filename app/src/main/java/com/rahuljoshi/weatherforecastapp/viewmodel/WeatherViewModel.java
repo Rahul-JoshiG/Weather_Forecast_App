@@ -6,9 +6,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.rahuljoshi.weatherforecastapp.model.currentdatamodel.WeatherApiResponse;
-import com.rahuljoshi.weatherforecastapp.model.forecastdatamodel.WeatherResponse;
+import com.rahuljoshi.weatherforecastapp.model.data.forecastmodel.WeatherResponse;
+import com.rahuljoshi.weatherforecastapp.model.data.todaymodel.TodayWeatherResponse;
 import com.rahuljoshi.weatherforecastapp.model.repository.WeatherRepository;
+import com.rahuljoshi.weatherforecastapp.utils.Constant;
+import com.rahuljoshi.weatherforecastapp.utils.SessionManager;
 
 import javax.inject.Inject;
 
@@ -19,15 +21,7 @@ public class WeatherViewModel extends ViewModel {
 
     private final String TAG = "WeatherViewModel";
 
-    private final WeatherRepository
-            weatherRepository;
-
-    /**
-     * MutableLiveData to hold the weather data and error message
-     */
-    private final MutableLiveData<WeatherApiResponse> mWeatherData = new MutableLiveData<>();
-    private final MutableLiveData<String> mErrorMessage = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> mIsLoading = new MutableLiveData<>();
+    private final WeatherRepository weatherRepository;
 
     private final MutableLiveData<WeatherResponse> mWeatherForecastData = new MutableLiveData<>();
     private final MutableLiveData<String> mForecastErrorMessage = new MutableLiveData<>();
@@ -37,35 +31,35 @@ public class WeatherViewModel extends ViewModel {
     private final MutableLiveData<String> mLocationErrorMessage = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mLocationLoading = new MutableLiveData<>();
 
+    private final MutableLiveData<String> mLocation = new MutableLiveData<>();
+
+    public MutableLiveData<String> getLocation() {
+        return mLocation; // Only return the LiveData
+    }
+
+    // Method to update the location value
+    public void updateLocation(String city) {
+        Log.d(TAG, "updateLocation: updating location");
+        SessionManager.putString(Constant.CITY_KEY, city);
+        mLocation.postValue(SessionManager.getString(Constant.CITY_KEY));
+    }
+
+
+    //mutable live data to hold the today weather info
+    private final MutableLiveData<TodayWeatherResponse> mTodayWeatherData = new MutableLiveData<>();
+    private final MutableLiveData<String> mTodayWeatherFailure = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mTodayWeatherLoading = new MutableLiveData<>();
+
+
+
     @Inject
     public WeatherViewModel(WeatherRepository weatherRepository) {
         this.weatherRepository = weatherRepository;
     }
 
-    // Method to fetch weather data from the repository
-    public LiveData<WeatherApiResponse> getWeatherData() {
-        return mWeatherData;
-    }
-
-    // Method to fetch error which comes while fetching data from the repository
-    public LiveData<String> getErrorMessage() {
-        return mErrorMessage;
-    }
-
-    public LiveData<Boolean> getIsLoading() {
-        return mIsLoading;
-    }
-
-    // Method to fetch weather data from the repository
     public LiveData<WeatherResponse> getWeatherForecastData() {
         return mWeatherForecastData;
     }
-
-    // Method to fetch error which comes while fetching data from the repository
-    public LiveData<String> getWeatherForecastErrorMessage() {
-        return mForecastErrorMessage;
-    }
-
     public LiveData<Boolean> getForecastIsLoading() {
         return mForecastLoading;
     }
@@ -76,41 +70,21 @@ public class WeatherViewModel extends ViewModel {
         return mWeatherLocationData;
     }
 
-    // Method to fetch error which comes while fetching data from the repository
-    public LiveData<String> getLocationErrorMessage() {
-        return mLocationErrorMessage;
+
+    //method to fetch today weather response into live data
+    public LiveData<TodayWeatherResponse> getTodayWeatherResponse() {
+        return mTodayWeatherData;
     }
 
-    public LiveData<Boolean> getLocationIsLoading() {
-        return mLocationLoading;
-    }
-
-    // Method to fetch weather data from the repository
-    public void fetchWeatherData(String city) {
-        Log.d(TAG, "fetchWeatherData: from today fragment in view model city = "+city);
-        mIsLoading.postValue(true);
-        weatherRepository.getCurrentWeatherData(city, new WeatherRepository.WeatherRepositoryCallBack() {
-            @Override
-            public void onSuccess(WeatherApiResponse response) {
-                Log.d(TAG, "onSuccess: response in view model = " + response.toString());
-                mWeatherData.postValue(response);
-                mIsLoading.postValue(false);
-            }
-
-            @Override
-            public void onFailure(String error) {
-                Log.d(TAG, "onFailure: failed in view model = " + error);
-                mErrorMessage.postValue(error);
-                mIsLoading.postValue(false);
-            }
-        });
+    public LiveData<Boolean> getTodayWeatherLoading(){
+        return mTodayWeatherLoading;
     }
 
 
     // Method to fetch weather data from the repository
-    public void fetchForecastWeatherData(String city, int days) {
+    public void fetchForecastWeatherData(String city) {
         mForecastLoading.postValue(true);
-        weatherRepository.getForecastWeatherData(city, days, new WeatherRepository.WeatherRepositoryForecastCallBack() {
+        weatherRepository.getForecastWeatherData(city, Constant.WEEK, new WeatherRepository.WeatherRepositoryForecastCallBack() {
             @Override
             public void onSuccess(WeatherResponse weatherResponse) {
                 Log.d(TAG, "onSuccess: weather response " + weatherResponse.toString());
@@ -130,7 +104,7 @@ public class WeatherViewModel extends ViewModel {
     // Method to fetch weather data from the repository
     public void fetchLocation(String latAndLong) {
         mForecastLoading.postValue(true);
-        weatherRepository.getLocation(latAndLong, new WeatherRepository.WeatherRepositoryLocationCallBack(){
+        weatherRepository.getLocation(latAndLong, new WeatherRepository.WeatherRepositoryLocationCallBack() {
             @Override
             public void onSuccess(WeatherResponse weatherResponse) {
                 Log.d(TAG, "onSuccess: weather response " + weatherResponse.toString());
@@ -147,4 +121,24 @@ public class WeatherViewModel extends ViewModel {
         });
     }
 
+    //method to fetch today weather response
+    public void getTodayWeatherResponse(String city) {
+        Log.d(TAG, "getTodayWeatherResponse: ");
+        mTodayWeatherLoading.postValue(true);
+        weatherRepository.fetchTodayWeather(city, new WeatherRepository.TodayWeatherRepositoryCallBack() {
+            @Override
+            public void onSuccess(TodayWeatherResponse todayWeatherResponse) {
+                Log.d(TAG, "onSuccess: ");
+                mTodayWeatherData.postValue(todayWeatherResponse);
+                mTodayWeatherLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Log.d(TAG, "onFailure: ");
+                mTodayWeatherFailure.postValue(errorMessage);
+                mTodayWeatherLoading.postValue(false);
+            }
+        });
+    }
 }

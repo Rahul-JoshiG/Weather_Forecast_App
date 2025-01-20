@@ -7,8 +7,8 @@
         android:icon="@drawable/ic_today"/>
 
     <item
-        android:id="@+id/seven_day"
-        android:title="7 Days"
+        android:id="@+id/week"
+        android:title="Week"
         android:icon="@drawable/c_seven_day"/>
 
     <item

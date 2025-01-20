@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="weather_now">Weather now</string>
+    <string name="location">Location</string>
+    <string name="metric">Metric</string>
+    <string name="unit_system">Unit System</string>
+    <string name="day_date_name">Day Date Name</string>
+    <string name="app_icon">app icon</string>
+    <string name="weather_napp">Weather\nApp</string>
+    <string name="wind_hint">__Km/h</string>
+</resources>

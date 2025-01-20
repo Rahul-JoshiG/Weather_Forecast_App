@@ -6,7 +6,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color"
         tools:context=".view.fragments.WeekFragment">
 
         <ProgressBar
@@ -20,24 +19,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/week_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/week_forecast"
-            android:textAlignment="center"
-            android:background="@color/app_bar_color"
-            app:titleTextColor="@color/app_bar_text"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             tools:listitem="@layout/week_weather_layout"
-            android:layout_margin="@dimen/_5sdp"
-            android:maxLength="5"
-            app:layout_constraintTop_toBottomOf="@id/week_toolbar"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

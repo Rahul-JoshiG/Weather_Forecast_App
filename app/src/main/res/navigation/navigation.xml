@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/todayFragment">
+
+    <fragment
+        android:id="@+id/todayFragment"
+        android:name="com.rahuljoshi.weatherforecastapp.view.fragments.TodayFragment"
+        android:label="TodayFragment" >
+        <action
+            android:id="@+id/action_todayFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_todayFragment_to_weekFragment"
+            app:destination="@id/weekFragment" />
+        <action
+            android:id="@+id/action_todayFragment_self"
+            app:destination="@id/todayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.rahuljoshi.weatherforecastapp.view.fragments.SettingFragment"
+        android:label="SettingFragment" >
+        <action
+            android:id="@+id/action_settingFragment_to_todayFragment"
+            app:destination="@id/todayFragment" />
+        <action
+            android:id="@+id/action_settingFragment_self"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_weekFragment"
+            app:destination="@id/weekFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weekFragment"
+        android:name="com.rahuljoshi.weatherforecastapp.view.fragments.WeekFragment"
+        android:label="WeekFragment" >
+        <action
+            android:id="@+id/action_weekFragment_to_todayFragment"
+            app:destination="@id/todayFragment" />
+        <action
+            android:id="@+id/action_weekFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_weekFragment_self"
+            app:destination="@id/weekFragment" />
+    </fragment>
+</navigation>

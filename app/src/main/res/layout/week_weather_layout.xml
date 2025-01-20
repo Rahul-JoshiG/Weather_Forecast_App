@@ -3,76 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_color">
+        android:layout_marginTop="@dimen/_10sdp"
+        android:elevation="@dimen/_10sdp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/day_weather_condition"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
-            android:layout_margin="@dimen/_10sdp"
-            android:padding="@dimen/_10sdp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_location"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutCompat"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayoutCompat" />
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/linearLayoutCompat"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/day_date_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="@dimen/_4sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/day_weather_condition"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="@dimen/_8sdp"
+            android:text="@string/day_date_name"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/day_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_5sdp"
-                android:text="08-01-2025"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/_20ssp"
-                android:textStyle="bold" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dashboard_item_3"
+            android:paddingVertical="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/day_date_text">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/day_temp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:drawableStart="@drawable/ic_temp"
-                android:drawablePadding="@dimen/_10sdp"
-                android:padding="@dimen/_5sdp"
-                android:text="100.100 °C"
-                android:textSize="@dimen/_18ssp"
-                android:textStyle="bold" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/day_condition_icon"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ll2"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/day_wind_speed"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:drawableStart="@drawable/ic_speed"
-                android:drawablePadding="@dimen/_10sdp"
-                android:padding="@dimen/_5sdp"
-                android:text="5.5km/h"
-                android:textSize="@dimen/_18ssp"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-        
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/day_condition_icon"
+                app:layout_constraintEnd_toStartOf="@id/day_condition_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/day_condition_icon">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/day_temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_temp"
+                    android:drawableTint="@color/white"
+                    android:text="18°"
+                    android:textSize="@dimen/_40ssp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/day_condition_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_20sdp"
+                    android:text="Clear"
+                    android:textSize="@dimen/_26ssp"
+                    android:textStyle="bold" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/background_color"
-            android:layout_marginBottom="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
