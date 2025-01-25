@@ -81,10 +81,7 @@ The app follows the **MVVM (Model-View-ViewModel)** architecture:
 ## Screensorts 
 | **Today Weather** | **Week Weather** | **Setting** |
 |--------------------------|--------------------------|---------------------------|
-| ![image](https://github.com/user-attachments/assets/aa811ee5-b54b-42b9-b3f6-9dfd53d3a0f6)
- | ![image](https://github.com/user-attachments/assets/fc3bccc9-ea35-478b-962f-5d6a98bcf47e)
- | ![image](https://github.com/user-attachments/assets/f23caada-146a-4037-972c-c5c9d3f0634a)
- |
+| ![image](https://github.com/user-attachments/assets/aa811ee5-b54b-42b9-b3f6-9dfd53d3a0f6)| ![image](https://github.com/user-attachments/assets/fc3bccc9-ea35-478b-962f-5d6a98bcf47e)| ![image](https://github.com/user-attachments/assets/f23caada-146a-4037-972c-c5c9d3f0634a)|
 
 
 
