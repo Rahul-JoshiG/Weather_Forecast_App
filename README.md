@@ -1,4 +1,4 @@
-<div align="center"> <img src="https://github.com/Rahul-JoshiG/Weather-Forecast-App/blob/master/app/src/main/res/drawable/logo.png" alt="App Logo" style="width: 150px; height: 150px;" /> 
+<div align="center"> <img src="https://github.com/Rahul-JoshiG/Weather_Forecast_App/blob/master/app/src/main/res/drawable/app_icon.png" alt="App Logo" style="width: 150px; height: 150px;" /> 
 
 </div> <h1 align="center">Weather Forecast App</h1> 
 
@@ -103,6 +103,6 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ## Contact
   **Developed by Rahul Joshi**
-      - GitHub: Rahul-JoshiG
-      - LinkedIn: Rahul Joshi
-      - Email: rahul.joshi.dev@gmail.com
+      - GitHub: https://github.com/Rahul-JoshiG
+      - LinkedIn: www.linkedin.com/in/prof-rahul-joshi
+      - Email: prof.rahuljoshi@gmail.com
