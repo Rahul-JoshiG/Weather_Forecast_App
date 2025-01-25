@@ -1,4 +1,15 @@
-# Weather Forecast App
+<div align="center"> <img src="https://github.com/Rahul-JoshiG/Weather-Forecast-App/blob/master/app/src/main/res/drawable/logo.png" alt="App Logo" style="width: 150px; height: 150px;" /> 
+
+</div> <h1 align="center">Weather Forecast App</h1> 
+
+<p align="center"> A powerful and user-friendly app to get real-time weather updates, a 7-day forecast, and customize your weather experience. </p> 
+
+<div align="center"> 
+  <a href="#features">🚀 Features</a> 
+  <a href="#tech-stack">🛠️ Tech Stack</a>  
+  <a href="#screens">📸 Screenshots</a> 
+  <a href="#installation">📥 Installation</a>  
+  <a href="#contact">📧 Contact</a> </div>
 
 ## Overview
 The **Weather Forecast App** provides accurate and up-to-date weather information for your current location or a selected city. With a user-friendly interface and robust architecture, the app ensures a seamless experience for weather updates.
@@ -9,16 +20,19 @@ The **Weather Forecast App** provides accurate and up-to-date weather informatio
 - **Week Fragment**:
   - Provides a 7-day weather forecast, including key details for each day.
 - **Settings Fragment**:
-  - Allows users to change the app's theme.
-  - Lets users search for and switch to a different city.
+  - Allows users to:
+      - Switch between Metric and Imperial units.
+      - Customize the app's theme (Light/Dark).
+      - Search for and update the weather for different cities.
 - **Bottom Navigation Bar**:
   - Quick navigation between Today, Week, and Settings fragments.
 
 ## Tech Stack
-- **MVVM Architecture**: Ensures scalability and maintainability.
-- **Dagger Hilt**: Simplifies dependency injection.
-- **Retrofit**: Efficiently handles API calls for fetching weather data.
-- **Glide**: Processes and displays weather-related images.
+  - **Java**: Core language for development.
+  - **XML**: Designed the responsive and intuitive UI.
+  - **MVVM Architecture**: Ensures scalability, separation of concerns, and maintainability.
+  - **Retrofit**: Used for fetching weather data via RESTful APIs.
+  - **Glide**: Efficiently loads and displays weather-related images.
 
 ## Screens
 ### 1. Today Fragment
@@ -33,6 +47,12 @@ The **Weather Forecast App** provides accurate and up-to-date weather informatio
 ### 3. Settings Fragment
 - Theme customization (e.g., light or dark mode).
 - City selection using a search bar.
+
+## Screenshorts 
+| **Today Weather** | **Week Weather** | **Setting** |
+|--------------------------|--------------------------|---------------------------|
+| ![image](https://github.com/user-attachments/assets/aa811ee5-b54b-42b9-b3f6-9dfd53d3a0f6)| ![image](https://github.com/user-attachments/assets/fc3bccc9-ea35-478b-962f-5d6a98bcf47e)| ![image](https://github.com/user-attachments/assets/f23caada-146a-4037-972c-c5c9d3f0634a)|
+
 
 ## Installation
 1. Clone this repository.
@@ -78,17 +98,11 @@ The app follows the **MVVM (Model-View-ViewModel)** architecture:
    - Change the theme.
    - Search for and select a city to update the weather data.
   
-## Screensorts 
-| **Today Weather** | **Week Weather** | **Setting** |
-|--------------------------|--------------------------|---------------------------|
-| ![image](https://github.com/user-attachments/assets/aa811ee5-b54b-42b9-b3f6-9dfd53d3a0f6)| ![image](https://github.com/user-attachments/assets/fc3bccc9-ea35-478b-962f-5d6a98bcf47e)| ![image](https://github.com/user-attachments/assets/f23caada-146a-4037-972c-c5c9d3f0634a)|
-
-
-
-
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-## Credits
-Developed by Rahul Joshi.
-```
+## Contact
+  **Developed by Rahul Joshi**
+      - GitHub: Rahul-JoshiG
+      - LinkedIn: Rahul Joshi
+      - Email: rahul.joshi.dev@gmail.com
