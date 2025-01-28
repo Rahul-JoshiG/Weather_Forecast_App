@@ -32,6 +32,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ProgressBar
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/progress_bar"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/card_background"
+                android:padding="@dimen/_120sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/current_date_time"
                 android:layout_width="wrap_content"

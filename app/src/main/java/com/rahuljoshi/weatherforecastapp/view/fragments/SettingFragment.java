@@ -79,8 +79,9 @@ public class SettingFragment extends Fragment {
                 Toast.makeText(requireContext(), "City name cannot be empty!", Toast.LENGTH_SHORT).show();
             } else {
                 Log.d(TAG, "showSearchBoxAndUpdateTheCity: Updating city to " + cityName);
-                //SessionManager.putString(Constant.CITY_KEY, cityName);
+                SessionManager.putString(Constant.CITY_KEY, cityName);
                 mViewModel.updateLocation(cityName);
+                Toast.makeText(requireContext(), "City updated", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -101,19 +102,19 @@ public class SettingFragment extends Fragment {
 
         // Retrieve current unit preference
         String currentUnit = SessionManager.getUnit(Constant.UNIT_NAME);
-        int selectedIndex = currentUnit.equals("imperial") ? 1 : 0; // Default to Metric if not set
+        int selectedIndex = currentUnit.equals("Imperial") ? 1 : 0; // Default to Metric if not set
 
         // Create a single-choice dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Select Unit System")
                 .setSingleChoiceItems(unitOptions, selectedIndex, (dialog, which) -> {
                     // Handle selection
-                    String selectedUnit = which == 0 ? "metric" : "imperial";
                     String unitLabel = which == 0 ? "Metric" : "Imperial";
 
                     // Save the selection and update UI
-                    SessionManager.putString(Constant.UNIT_NAME, selectedUnit);
-                    mBinding.unitSystemValue.setText(unitLabel);
+                    SessionManager.putString(Constant.UNIT_NAME, unitLabel);
+                    String unit = SessionManager.getUnit(Constant.UNIT_NAME);
+                    mBinding.unitSystemValue.setText(unit);
 
                     Log.d(TAG, "Unit system updated to: " + unitLabel);
 
@@ -124,6 +125,17 @@ public class SettingFragment extends Fragment {
         // Show the dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Retrieve the latest unit from the SessionManager
+        String currentUnit = SessionManager.getUnit(Constant.UNIT_NAME);
+
+        // Update the TextView with the latest unit
+        mBinding.unitSystemValue.setText(currentUnit);
+        Log.d(TAG, "onResume: Unit system updated to: " + currentUnit);
     }
 
     private void checkingMode() {

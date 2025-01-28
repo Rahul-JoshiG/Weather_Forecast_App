@@ -16,7 +16,7 @@ public class Constant{
     public static final String DARK_MODE = "is dark mode";
     public static final int TODAY = 1;
     public static final int WEEK = 7;
-    public static final String UNIT_NAME = "metric";
+    public static final String UNIT_NAME = "Metric";
 
 
 }

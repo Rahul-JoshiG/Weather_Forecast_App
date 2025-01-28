@@ -30,7 +30,6 @@ public class WeatherIconMapper {
         nightAnimationMap.put(1030L, R.raw.night_mist);
         nightAnimationMap.put(1003L, R.raw.partly_cloudly);
         nightAnimationMap.put(1009L, R.raw.night_overcast);
-        // Add other night animations...
     }
 
     /**
@@ -40,7 +39,7 @@ public class WeatherIconMapper {
      * @return The animation resource ID for daytime or a default animation if not found.
      */
     public static int getDayAnimation(Long conditionCode) {
-        return dayAnimationMap.getOrDefault(conditionCode, R.raw.day_clear); // Default animation for day
+        return dayAnimationMap.getOrDefault(conditionCode, R.raw.day_clear);
     }
 
     /**
@@ -50,7 +49,7 @@ public class WeatherIconMapper {
      * @return The animation resource ID for nighttime or a default animation if not found.
      */
     public static int getNightAnimation(Long conditionCode) {
-        return nightAnimationMap.getOrDefault(conditionCode, R.raw.night_clear); // Default animation for night
+        return nightAnimationMap.getOrDefault(conditionCode, R.raw.night_clear);
     }
 
 }

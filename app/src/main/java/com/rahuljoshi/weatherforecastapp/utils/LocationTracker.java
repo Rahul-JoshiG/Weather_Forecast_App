@@ -13,12 +13,15 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 public class LocationTracker extends Service implements LocationListener {
 
+    private final String TAG = "LocationTracker";
     private final Context mContext;
     boolean checkGPS = false;
     boolean checkNetwork = false;
@@ -68,43 +71,11 @@ public class LocationTracker extends Service implements LocationListener {
 
                 }
 
-
-                /*if (checkNetwork) {
-
-
-                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                    }
-                    locationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER,
-                            MIN_TIME_BW_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-
-                    if (locationManager != null) {
-                        loc = locationManager
-                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-                    }
-
-                    if (loc != null) {
-                        latitude = loc.getLatitude();
-                        longitude = loc.getLongitude();
-                    }
-                }*/
-
             }
 
-
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d(TAG, "getLocation: "+e.getLocalizedMessage());
         }
-
         return loc;
     }
 
@@ -177,8 +148,8 @@ public class LocationTracker extends Service implements LocationListener {
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-
+    public void onLocationChanged(@NonNull Location location) {
+        getLocation();
     }
 
     @Override
@@ -187,12 +158,12 @@ public class LocationTracker extends Service implements LocationListener {
     }
 
     @Override
-    public void onProviderEnabled(String s) {
+    public void onProviderEnabled(@NonNull String s) {
 
     }
 
     @Override
-    public void onProviderDisabled(String s) {
+    public void onProviderDisabled(@NonNull String s) {
 
     }
 }

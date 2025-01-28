@@ -32,23 +32,32 @@ public class TodayFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: today fragment");
         mBinding = FragmentTodayBinding.inflate(inflater, container, false);
         // Use ViewModelProvider to get the ViewModel instance
         mViewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
+        getTodayWeatherData();
         return mBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "onViewCreated: today fragment");
 
         observeWeatherData();
-        getTodayWeatherData();
     }
 
     private void observeWeatherData() {
         Log.d(TAG, "observeWeatherData: ");
 
+        mViewModel.getTodayWeatherLoading().observe(getViewLifecycleOwner(), isLoading->{
+            if(isLoading){
+                mBinding.progressBar.setVisibility(View.VISIBLE);
+            }else{
+                mBinding.progressBar.setVisibility(View.GONE);
+            }
+        });
 
         mViewModel.getTodayWeatherResponse().observe(getViewLifecycleOwner(), response -> {
             if (response != null) {
@@ -57,6 +66,7 @@ public class TodayFragment extends Fragment {
             }
         });
     }
+
 
     private void updateUi(TodayWeatherResponse response, String unit) {
         Log.d(TAG, "updateUi: ");
@@ -131,5 +141,6 @@ public class TodayFragment extends Fragment {
     private void getTodayWeatherData() {
         Log.d(TAG, "getTodayWeatherData: ");
         mViewModel.getTodayWeatherResponse(SessionManager.getString(Constant.CITY_KEY));
+
     }
 }
